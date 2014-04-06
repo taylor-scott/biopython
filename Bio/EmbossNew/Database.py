@@ -15,21 +15,30 @@ class Usa(object):
 
     def __str__(self):
         if not self.stop and not self.start:
-            return "{}:{}".format(self.db, self.id)
-        return "{}:{}[{}:{}]".format(
-            self.db,
-            self.id,
-            *["" if n is None else n for n in (self.start, self.stop)]
-        )
+            return "{}:{}\n{}".format(
+                self.db,
+                self.id,
+                self.sequence.__repr__()
+            )
+        else:
+            adj_start = self.start
+            if adj_start is not None:
+                adj_start += 1
+            return "{}:{}[{}:{}]\n{seq}".format(
+                self.db,
+                self.id,
+                *["" if n is None else n for n in (adj_start, self.stop)],
+                seq=self.sequence.__repr__()
+            )
 
     def __len__(self):
         if self.sequence:
             return len(self.sequence)
         else:
-            return self.stop - self.start + 1
+            return self.stop - self.start
 
 
-class Database(object):
+class Db(object):
     def __init__(self, db_dir):
         self.db_dir = db_dir
         self.index_dict = {}
