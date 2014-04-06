@@ -267,6 +267,7 @@ PACKAGES = [
     'Bio.Crystal',
     'Bio.Data',
     'Bio.Emboss',
+    'Bio.EmbossNew',
     'Bio.Entrez',
     'Bio.ExPASy',
     'Bio.FSSP',
