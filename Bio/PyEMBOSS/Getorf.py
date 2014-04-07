@@ -1,5 +1,7 @@
 from Bio.Seq import Seq
-from Bio.EmbossNew.Database import Usa
+from Bio.PyEMBOSS.Usa import Usa
+
+
 def getorf(utr, min=None, max=None):
     frames = (0, 1, 2)
     START = "ATG"
@@ -21,9 +23,14 @@ def getorf(utr, min=None, max=None):
                 orf_codons.append(codon)
             elif orf_codons and codon in STOP:
                 orf = "".join(orf_codons)
-                if (len(orf) >= min or min is None) and (len(orf) <= max or max is None):
+                if (len(orf) >= min or min is None) and\
+                   (len(orf) <= max or max is None):
                     stop_pos = i*3 + frame
-                    orf_usa = Usa(utr.db, "{}_{}".format(utr.id, len(orf_list)+1), start_pos, stop_pos)
+                    orf_usa = Usa(
+                        utr.db,
+                        "{}_{}".format(utr.id, len(orf_list)+1),
+                        start_pos, stop_pos
+                    )
                     seq = Seq(orf)
                     orf_usa.sequence = seq
                     orf_list.append(orf_usa)
@@ -33,9 +40,15 @@ def getorf(utr, min=None, max=None):
             i += 1
         if orf_codons:
             orf = "".join(orf_codons)
-            if (len(orf) >= min or min is None) and (len(orf) <= max or max is None):
+            if (len(orf) >= min or min is None) and\
+               (len(orf) <= max or max is None):
                 stop_pos = len(sequence)
-                orf_usa = Usa(utr.db, "{}_{}".format(utr.id, len(orf_list)+1), start_pos, stop_pos)
+                orf_usa = Usa(
+                    utr.db,
+                    "{}_{}".format(utr.id, len(orf_list)+1),
+                    start_pos,
+                    stop_pos
+                )
                 seq = Seq(orf)
                 orf_usa.sequence = seq
                 orf_list.append(orf_usa)
