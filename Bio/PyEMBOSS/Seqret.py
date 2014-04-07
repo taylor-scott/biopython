@@ -19,7 +19,6 @@ def seqret(usa_str, database):
     -------
     A Usa object with the sequence from the EMBOSS database
     '''
-
     #Create empty USA from the input string
     usa = Usa.parse_usa(usa_str)
     initial_dir = os.getcwd()
