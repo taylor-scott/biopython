@@ -87,7 +87,7 @@ def parse_usa(usa_str):
     A Usa object
     '''
     usa_pattern = re.compile(
-        "([A-Za-z_0-9]+):([A-Za-z0-9_]+)(?:\[(\d+)?:(\d+)?])?"
+        "([A-Za-z_0-9]+):([A-Za-z0-9_.]+)(?:\[(\d+)?:(\d+)?])?"
     )
     valid_usa = usa_pattern.search(usa_str)
     if valid_usa:

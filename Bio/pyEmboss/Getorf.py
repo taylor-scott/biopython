@@ -1,5 +1,5 @@
 from Bio.Seq import Seq
-from Bio.PyEMBOSS.Usa import Usa
+from Bio.pyEmboss.Usa import Usa
 
 
 def getorf(utr, min=None, max=None):
@@ -85,7 +85,7 @@ def getorf(utr, min=None, max=None):
                     start_pos,
                     stop_pos
                 )
-                A Biopython Seq object
+                #A Biopython Seq object
                 seq = Seq(orf)
                 #Add sequence to Usa
                 orf_usa.sequence = seq

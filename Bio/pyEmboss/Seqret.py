@@ -1,5 +1,5 @@
 #!/usr/env/python
-from Bio.PyEMBOSS import Usa
+from Bio.pyEmboss import Usa
 from Bio.Seq import Seq
 import os
 
