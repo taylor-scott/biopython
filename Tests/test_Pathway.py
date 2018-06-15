@@ -210,6 +210,18 @@ class ReactionTestCase(unittest.TestCase):
         self.assertEqual(self.r_3.reverse().reverse(), self.r_3,
                          "double reversal not identity")
 
+    def test_species(self):
+        self.assertEqual(self.r_empty.species(), [],
+                         "Reaction().species does not return empty list")
+        self.assertEqual(list({"a": -1}), self.r_prod.species(),
+                         "Reaction with only reactants gives incorrect species")
+        self.assertEqual(list({"a": 1}), self.r_dest.species(),
+                         "Reaction with only products gives incorrect species")
+        self.assertEqual(list({"c": -2, "d": -1, "a": 1, "e": 2}),
+                         self.r_4.species(),
+                         "Reaction with products and reactants gives" \
+                         "incorrect species")
+
 
 if __name__ == "__main__":
     runner = unittest.TextTestRunner(verbosity=2)
