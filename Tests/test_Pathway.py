@@ -185,6 +185,8 @@ class ReactionTestCase(unittest.TestCase):
                          "incorrect str of irreversible reaction")
         self.assertEqual("a <=> b", str(self.r_1_reversible),
                          "incorrect str of reversible reaction")
+        self.assertEqual(" --> ", str(self.r_empty),
+                         "incorrect str of empty reaction")
 
         # Test str representation if 0 coefficient is added
         self.r_1.reactants["c"] = 0
