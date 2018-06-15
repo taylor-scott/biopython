@@ -74,11 +74,9 @@ class Reaction(object):
         if reactants is None:
             self.reactants = {}
         else:
-            self.reactants = reactants.copy()
-            # loop over original, edit the copy
-            for r, value in reactants.items():
-                if value == 0:
-                    del self.reactants[r]
+            self.reactants = {reactant: coefficient
+                              for reactant, coefficient in reactants.items() 
+                              if coefficient != 0}
         self.catalysts = sorted(set(catalysts))
         self.data = data
         self.reversible = reversible
