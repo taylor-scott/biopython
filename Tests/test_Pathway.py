@@ -145,6 +145,7 @@ class ReactionTestCase(unittest.TestCase):
         self.r_prod = Reaction({"a": 1})
         self.r_dest = Reaction({"a": -1})
         self.r_1 = Reaction({"a": -1, "b": 1})
+        self.r_catalysts = Reaction(catalysts=("a", "b", "c"))
         self.r_1i = Reaction({"a": -1, "b": 1, "c": 0})
         self.r_1_reversible = Reaction({"a": -1, "b": 1}, reversible=True)
         self.r_2 = Reaction({"b": -1, "c": 1})
@@ -162,6 +163,9 @@ class ReactionTestCase(unittest.TestCase):
         self.assertIn("a", self.r_1i.reactants, "Product not added to reaction")
         self.assertIn("b", self.r_1i.reactants, "Reactant not added to reaction")
         self.assertNotIn("c", self.r_1i.reactants, "Species with 0 coefficient in reaction")
+
+        # Test catalysts assignment
+        self.assertEqual(sorted(set(("a", "b", "c"))), self.r_catalysts.catalysts)
 
         # Test self.reversible assignment
         self.assertFalse(self.r_1.reversible)
