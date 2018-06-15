@@ -150,7 +150,7 @@ class ReactionTestCase(unittest.TestCase):
         self.r_1_reversible = Reaction({"a": -1, "b": 1}, reversible=True)
         self.r_2 = Reaction({"b": -1, "c": 1})
         self.r_3 = Reaction({"a": -1, "d": 2})
-        self.r_4 = Reaction({"c": -1, "d": -1, "a": 1, "e": 2})
+        self.r_4 = Reaction({"c": -2, "d": -1, "a": 1, "e": 2})
 
     def test_init(self):
         # Test empty reaction init
@@ -171,6 +171,18 @@ class ReactionTestCase(unittest.TestCase):
         self.assertFalse(self.r_1.reversible)
         self.assertTrue(self.r_1_reversible.reversible)
 
+    def test_str(self):
+        self.assertEqual(" --> a", str(self.r_prod), "incorrect str with empty reactants")
+        self.assertEqual("a --> ", str(self.r_dest), "incorrect str with empty products")
+        self.assertEqual("2 c + d --> a + 2 e", str(self.r_4), "incorrect str of irreversible reaction")
+        self.assertEqual("a <=> b", str(self.r_1_reversible), "incorrect str of reversible reaction")
+
+        # Test str representation if 0 coefficient is added
+        self.r_1.reactants["c"] = 0
+        self.assertRaises(AttributeError, str, self.r_1)
+        
+        # Clean up - remove 0 coefficient
+        del self.r_1.reactants["c"]
 
     def test_eq(self):
         self.assertEqual(self.r_1, self.r_1i)  # , "not equal to similar")
@@ -180,7 +192,7 @@ class ReactionTestCase(unittest.TestCase):
         self.assertEqual(self.r_empty.reverse(), self.r_empty, "empty reversed not empty")
         self.assertEqual(self.r_prod.reverse(), self.r_dest,
                           "reversed reaction not equal to similar")
-        self.assertEqual(self.r_4.reverse(), Reaction({"c": 1, "d": 1, "a": -1, "e": -2}),
+        self.assertEqual(self.r_4.reverse(), Reaction({"c": 2, "d": 1, "a": -1, "e": -2}),
                          "reversed reaction not equal to similar")
         self.assertEqual(self.r_3.reverse().reverse(), self.r_3,
                           "double reversal not identity")
