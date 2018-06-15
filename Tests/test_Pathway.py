@@ -158,6 +158,10 @@ class ReactionTestCase(unittest.TestCase):
         self.assertIsNone(self.r_empty.data)
         self.assertFalse(self.r_empty.reversible)
 
+        # Test reactants assignment
+        self.assertIn("a", self.r_1i.reactants, "Product not added to reaction")
+        self.assertIn("b", self.r_1i.reactants, "Reactant not added to reaction")
+        self.assertNotIn("c", self.r_1i.reactants, "Species with 0 coefficient in reaction")
 
         # Test self.reversible assignment
         self.assertFalse(self.r_1.reversible)
