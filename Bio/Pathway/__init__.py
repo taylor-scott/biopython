@@ -74,9 +74,10 @@ class Reaction(object):
         if reactants is None:
             self.reactants = {}
         else:
-            self.reactants = {reactant: coefficient
-                              for reactant, coefficient in reactants.items() 
-                              if coefficient != 0}
+            self.reactants = {}
+            for reactant, coefficient in reactants.items(): 
+                if coefficient != 0:
+                    self.reactants[reactant] = coefficient
         self.catalysts = sorted(set(catalysts))
         self.data = data
         self.reversible = reversible
