@@ -150,6 +150,14 @@ class ReactionTestCase(unittest.TestCase):
         self.r_3 = Reaction({"a": -1, "d": 2})
         self.r_4 = Reaction({"c": -1, "d": -1, "a": 1, "e": 2})
 
+    def test_init(self):
+        # Test empty reaction init
+        self.assertEqual(self.r_empty.reactants, {})
+        self.assertEqual(self.r_empty.catalysts, [])
+        self.assertIsNone(self.r_empty.data)
+        self.assertFalse(self.r_empty.reversible)
+
+
     def test_eq(self):
         self.assertEqual(self.r_1, self.r_1i)  # , "not equal to similar")
         self.assertNotEqual(self.r_3, self.r_4)  # , "equal to different")
