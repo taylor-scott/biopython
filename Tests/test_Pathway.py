@@ -146,6 +146,7 @@ class ReactionTestCase(unittest.TestCase):
         self.r_dest = Reaction({"a": -1})
         self.r_1 = Reaction({"a": -1, "b": 1})
         self.r_1i = Reaction({"a": -1, "b": 1, "c": 0})
+        self.r_1_reversible = Reaction({"a": -1, "b": 1}, reversible=True)
         self.r_2 = Reaction({"b": -1, "c": 1})
         self.r_3 = Reaction({"a": -1, "d": 2})
         self.r_4 = Reaction({"c": -1, "d": -1, "a": 1, "e": 2})
@@ -156,6 +157,11 @@ class ReactionTestCase(unittest.TestCase):
         self.assertEqual(self.r_empty.catalysts, [])
         self.assertIsNone(self.r_empty.data)
         self.assertFalse(self.r_empty.reversible)
+
+
+        # Test self.reversible assignment
+        self.assertFalse(self.r_1.reversible)
+        self.assertTrue(self.r_1_reversible.reversible)
 
 
     def test_eq(self):
