@@ -68,7 +68,7 @@ class Reaction(object):
     """
 
     def __init__(self, reactants=None, catalysts=(),
-                 reversible=0, data=None):
+                 reversible=False, data=None):
         """Initialize a new Reaction object."""
         # enforce invariants on reactants:
         if reactants is None:
